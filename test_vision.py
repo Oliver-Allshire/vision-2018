@@ -20,6 +20,5 @@ def test_sample_images():
             image = cv2.imread('sample_img/' + sample[0])
             # Rescale if necessary
             height, width, channels = image.shape
-            angle, position, contour_area = vision.process(image)
-            num_cube = len(process(image)) -1
-            assert sample[1] == num_cube
+            num_cube = len(process(image)) / 2
+            assert int(sample[1]) == num_cube
