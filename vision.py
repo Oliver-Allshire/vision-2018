@@ -109,6 +109,6 @@ def process(frame: np.ndarray, mask: np.ndarray = None, hsv: np.ndarray = None, 
 
             angle_x = math.atan2(-distance_x, focal_length)
 
-            output.extend([angle_x, angle_y])
+            output.extend([angle_x])
 
     return output
