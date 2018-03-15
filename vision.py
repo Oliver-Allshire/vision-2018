@@ -11,7 +11,7 @@ def main():
 
     cs = cscore.CameraServer.getInstance()
     camera = cs.startAutomaticCapture()  # TODO: specify path if multiple cameras
-    camera.setVideoMode(cscore.VideoMode.PixelFormat.kYUYV, 320, 240, 50)
+    camera.setVideoMode(cscore.VideoMode.PixelFormat.kYUYV, 320, 240, 25)
 
     camera.getProperty('vertical_flip').set(True)
     camera.getProperty('horizontal_flip').set(True)
@@ -41,7 +41,6 @@ def main():
             info.append(monotonic() - start_time)
 
             entry.setNumberArray(info)
-            NetworkTables.flush()
 
             source.putFrame(mask)
 
@@ -104,13 +103,11 @@ def process(frame: np.ndarray, mask: np.ndarray = None, hsv: np.ndarray = None, 
 
             # find the centre of the contour
             M = cv2.moments(contour)
-            x, y = M["m10"] / M["m00"], M["m01"] / M["m00"]
+            x, y = M["m10"] / M["m00"]
 
             distance_x = x - half_width
-            distance_y = y - half_height
 
             angle_x = math.atan2(-distance_x, focal_length)
-            angle_y = math.atan2(-distance_y, focal_length)
 
             output.extend([angle_x, angle_y])
 
