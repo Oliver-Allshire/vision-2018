@@ -104,7 +104,7 @@ def process(frame: np.ndarray, mask: np.ndarray = None, hsv: np.ndarray = None, 
 
             # find the centre of the contour
             M = cv2.moments(contour)
-            x, y = M["m10"] / M["m00"]
+            x = M["m10"] / M["m00"]
 
             distance_x = x - half_width
 
